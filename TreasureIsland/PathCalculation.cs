@@ -35,7 +35,7 @@ namespace TreasureIsland
 
             foreach (var point in neighbourPoints)
             {
-                if (point.X < 0 || point.Y < 0 || point.X > boundaries.X + 1 || point.Y > boundaries.Y + 1)
+                if (point.X < 0 || point.Y < 0 || point.X > boundaries.X || point.Y > boundaries.Y)
                     continue;
                 // Заполняем данные для точки маршрута.
                 var neighbourNode = new PathNode()

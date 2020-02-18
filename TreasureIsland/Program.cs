@@ -22,14 +22,14 @@ namespace TreasureIsland
             List<Point> notRedraw = new List<Point>();
             //Список выходов из базы
             List<Point> baseExits = new List<Point>();
-            //Точка, где лежит клад
-            Point goal = new Point();
+            //Точки, где лежит клад
+            List<Point> goals = new List<Point>();
             //Координаты всех сущностей карты
             List<Point> allCoordinates = new List<Point>();
             #endregion
 
             //Подготовка файла
-            string filePath = Directory.GetCurrentDirectory() + "\\TestData\\Map.txt";
+            string filePath = Directory.GetCurrentDirectory() + "\\TestData\\Map5.txt";
             FileParser file = new FileParser(filePath);
 
             string[] allLines = file.PrepareFile();
@@ -61,9 +61,9 @@ namespace TreasureIsland
                 {
                     List<Point> treasureCoordinates = treasure.Parse(line);
                     treasure.Print(treasureCoordinates);
-                    goal = new Point(treasureCoordinates[0].X, treasureCoordinates[0].Y);
-                    notRedraw.Add(goal);
-                    allCoordinates.Add(goal);
+                    goals.Add(new Point(treasureCoordinates[0].X, treasureCoordinates[0].Y));
+                    notRedraw.Add(new Point(treasureCoordinates[0].X, treasureCoordinates[0].Y));
+                    allCoordinates.Add(new Point(treasureCoordinates[0].X, treasureCoordinates[0].Y));
                 }
             }
 
@@ -98,7 +98,8 @@ namespace TreasureIsland
             Point maxPoint = MapSetup.GetMaxMapPoint(allCoordinates);
 
             //Отрисовка пути
-            PathCalculation.PrintPath(baseExits, goal, forbidden, notRedraw, maxPoint);
+            foreach(var goal in goals)
+                PathCalculation.PrintPath(baseExits, goal, forbidden, notRedraw, maxPoint);
             
             Console.ReadLine();
         }

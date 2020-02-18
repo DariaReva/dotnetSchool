@@ -19,14 +19,15 @@ namespace TreasureIsland
         {
             int maxX = allMapCoordinates[0].X;
             int maxY = allMapCoordinates[0].Y;
-            for(int i = 0; i < allMapCoordinates.Count - 1; i++)
-            {
-                maxX = allMapCoordinates[i].X > allMapCoordinates[i + 1].X ? allMapCoordinates[i].X
-                                                                           : allMapCoordinates[i + 1].X;
-                maxY = allMapCoordinates[i].Y > allMapCoordinates[i + 1].Y ? allMapCoordinates[i].Y
-                                                                           : allMapCoordinates[i + 1].Y;
-            }
 
+            for (int i = 0; i < allMapCoordinates.Count - 1; i++)
+            {
+                maxX = maxX > allMapCoordinates[i + 1].X ? maxX
+                                                         : allMapCoordinates[i + 1].X;
+                maxY = maxY > allMapCoordinates[i + 1].Y ? maxY
+                                                         : allMapCoordinates[i + 1].Y;
+            }
+            
             Point maxPoint = new Point(maxX, maxY);
             return maxPoint;
         }
